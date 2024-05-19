@@ -1,0 +1,5 @@
+com\devkings\inventaryservice\InventaryServiceApplication.class
+com\devkings\inventaryservice\service\InventoryService.class
+com\devkings\inventaryservice\controller\InventoryController.class
+com\devkings\inventaryservice\repository\InventoryRepository.class
+com\devkings\inventaryservice\model\Inventary.class
