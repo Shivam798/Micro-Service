@@ -17,4 +17,9 @@ public class OrderController {
         orderService.placeOrder(orderRequest);
         return "Order place successfully";
     }
+
+    @GetMapping("/name")
+    public String dump(){
+        return "Hello";
+    }
 }
