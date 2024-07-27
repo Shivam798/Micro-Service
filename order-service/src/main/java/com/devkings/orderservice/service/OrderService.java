@@ -23,16 +23,16 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
 
-    public void placeOrder(OrderRequest orderRequest) throws IllegalAccessException {
+    public void placeOrder(OrderRequest orderRequest){
         Order order=new Order();
         order.setOrder_number(UUID.randomUUID().toString());
         List<OrderLineItems> orderLineItems = orderRequest.getOrderLineItemsdtos()
                 .stream()
                 .map(this::maptoDto)
                 .toList();
-        order.setOrderLineItemsListl(orderLineItems);
+        order.setOrderLineItemsList(orderLineItems);
 
-        List<String> skuCodes = order.getOrderLineItemsListl().stream()
+        List<String> skuCodes = order.getOrderLineItemsList().stream()
                 .map(OrderLineItems::getSkuCode)
                 .toList();
 
@@ -44,12 +44,12 @@ public class OrderService {
                 .bodyToMono(InventoryResponse[].class)
                 .block();
 
-        assert inventoryResponseArray != null;
+
         boolean allProductInStock =Arrays.stream(inventoryResponseArray).allMatch(InventoryResponse::isInStock);
         if(allProductInStock){
             orderRepository.save(order);
         }else{
-            throw new IllegalAccessException("Product is not in stock , please try again later.");
+            throw new IllegalArgumentException("Product is not in stock , please try again later.");
         }
     }
 

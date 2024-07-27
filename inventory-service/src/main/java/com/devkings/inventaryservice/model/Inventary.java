@@ -1,7 +1,8 @@
 package com.devkings.inventaryservice.model;
 
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "t_inventary")
